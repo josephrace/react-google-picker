@@ -21,7 +21,8 @@ export default class GoogleChooser extends React.Component {
         createPicker: PropTypes.func,
         multiselect: PropTypes.bool,
         navHidden: PropTypes.bool,
-        disabled: PropTypes.bool
+        disabled: PropTypes.bool,
+        upload: PropTypes.bool
   };
 
   static defaultProps = {
@@ -32,7 +33,8 @@ export default class GoogleChooser extends React.Component {
     authImmediate: false,
     multiselect: false,
     navHidden: false,
-    disabled: false
+    disabled: false,
+    upload: false
   };
 
   constructor(props) {
@@ -133,6 +135,10 @@ export default class GoogleChooser extends React.Component {
 
     if (this.props.multiselect) {
       picker.enableFeature(window.google.picker.Feature.MULTISELECT_ENABLED)
+    }
+
+    if (this.props.upload) {
+      picker.addView(new window.google.picker.DocsUploadView());
     }
 
     picker.build()
